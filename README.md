@@ -1,7 +1,5 @@
-In WordlePlayer.py, it will give you a guess you may type in a string of Bs, Ys and Gs. as such; BBGYY 
-(B is for black, Y is for yellow and G is for green)
+In WordlePlayer.py and WordleAI.ipynb, the Program Will Give you a Guess, and you may Type in a String of Bs, Ys and Gs. as Such; BBGYY 
+(B is for Black, Y is for Yellow and G is for Green)
 
-you will have to type the result of the guess manually, as this is a very simple robot,
-it cannot scan your screen to check pixel colors.
-
-the ai requires the same help, it cannot look at a screen and recognise what's black yellow and green.
+You Will have to Type the Result of the Guess Manually, as this is a very Simple Robot,
+It Cannot Scan your Screen to Check Pixel Colors.
