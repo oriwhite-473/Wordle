@@ -31,12 +31,12 @@ alphabet = {
 dictionary = []
 with open("AI/WordleWords.txt", "r") as infile:
     dictionary = infile.readlines()
-all_guesses = []
 
+all_guesses = []
 
 def guessWord(all_guesses, dictionary, alphabet):
     if len(all_guesses) == 0:
-        return "slate"
+        return dictionary[0]
     
     # reading the blacks, yellows and greens
 
@@ -49,7 +49,7 @@ def guessWord(all_guesses, dictionary, alphabet):
                 alphabet[all_guesses[-1][0][letter]][i] = "B"
         if all_guesses[-1][1][letter] == "Y":
             alphabet[all_guesses[-1][0][letter]][letter] = "Y"
-            yellows.append(alphabet[all_guesses[-1][0][letter]][letter])
+            yellows.append(all_guesses[-1][0][letter])
         if all_guesses[-1][1][letter] == "G":
             for k,v in alphabet.items():
                 alphabet[k][letter] = "B"
@@ -60,12 +60,15 @@ def guessWord(all_guesses, dictionary, alphabet):
     dictpop = 0
     letter = 0
     while dictpop < len(dictionary):
+        already_popped = False
         for letter in range(0, 5):
-            if alphabet[dictionary[dictpop][letter]][letter] in ["B", "Y"]:
+            if alphabet[dictionary[dictpop][letter]][letter] in ["B", "Y"] :
                 dictionary.pop(dictpop)
                 dictpop -= 1
+                already_popped = True
                 break
-        if yellows not in dictionary[dictpop]:
+
+        if not set(yellows).issubset(set(list(dictionary[dictpop]))) and already_popped == False:
             dictionary.pop(dictpop)
             dictpop -= 1
         dictpop += 1
@@ -74,8 +77,11 @@ def guessWord(all_guesses, dictionary, alphabet):
 
     return dictionary[0]
 
-while True:    
+while True:
     nextGuess = guessWord(all_guesses, dictionary, alphabet)
     print(nextGuess)
     BYG = input()
+    if BYG == "GGGGG":
+        print("The Word Was:",dictionary[0])
+        break
     all_guesses.append((nextGuess, BYG))
